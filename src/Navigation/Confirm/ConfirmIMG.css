@@ -1,0 +1,72 @@
+
+.review-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.main-InstAI-icon {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.logo {
+  max-width: 100px;
+  height: auto;
+}
+
+.image-previews {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.image-preview {
+  position: relative;
+}
+
+.delete-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: #e74c3c;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.delete-button:hover {
+  background-color: #c0392b;
+}
+
+
+.confirmform{
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(to bottom, #9984f6 0%, #6d51ee 100%, #ffffff 100%);
+  padding: 10px;
+  margin: 30px auto;
+  margin-top: 2vh;
+  height: 400px;
+}
+
+.confirmButton{
+  background-color: #6f00ff;
+  color: white !important;
+ }
+
+ .confirmButton:hover{
+  background-color: #4e05af;
+   color: white !important;
+ }
+
+ .custom-border {
+  border-bottom: 2.5px solid rgb(230, 226, 226); 
+  box-shadow: 5px 2.5px 10px rgba(0, 0, 0, 0.2); 
+}

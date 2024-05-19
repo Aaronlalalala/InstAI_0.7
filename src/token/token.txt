@@ -1,0 +1,19 @@
+第一張圖是login之後回傳到前端的json 
+第二張圖是其他的api然後要把token放到header然後傳到後端
+第三張圖是我有做token的期限(目前是設定1小時候過期)，所以過了1小時之後就會forbidden 因此就需要重新登入才可以access
+
+
+example:
+
+try{
+    const response = await axios.get(REACT_APP_LOGIN,{
+        headers:{
+            'Content-Type' : 'application/json',
+            'Authorization' : 'Bearer your_token gere'
+        }
+    });
+    console.log(response.data);
+}
+catch(error){
+    console.error('Error detching data',error);
+}

@@ -1,0 +1,19 @@
+.logincard {
+    border: 1px solid #dddfe2;
+    box-shadow: 0 2px 4px rgb(0 0 10 / 10%), 0 8px 16px rgb(0 10 0 / 34%);
+    border: 1px solid #dddfe2;
+}
+
+
+
+.alertComponent {
+    position: absolute;
+    top: 0;
+    right: 0;
+    /* 其他您需要的樣式 */
+  }
+  
+
+
+
+

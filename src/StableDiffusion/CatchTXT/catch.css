@@ -1,0 +1,19 @@
+.catch-container {
+    text-align: center;
+  }
+  
+  button {
+    margin: 10px;
+  }
+  
+  .image-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .image-item {
+    margin: 10px;
+    text-align: center;
+  }
+  

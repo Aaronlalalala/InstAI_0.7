@@ -1,0 +1,307 @@
+
+
+.TXTcontanier {
+    background-color: rgb(255, 255, 255);
+    width: 100vw;
+    height: 100%;
+    /* display: flex;
+    flex-direction: column; */
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    
+  }
+
+  .txt2img-title-grid{
+    display: grid;
+    grid-template-columns:5% 93%;
+    grid-template-rows: 75px ;
+    align-items: center; 
+    grid-template-areas: 
+    
+    "InstAI-Icon section1"
+    
+  ;
+    grid-gap: 50px;
+    margin-bottom: 10px;
+  }
+  
+  .txt2img-InstAI-Icon{
+    grid-area: InstAI-Icon;
+    justify-self: start;
+  }
+  
+  .txt2img-section1{
+    grid-area: section1;
+    justify-self: start;
+  
+  
+  }
+  /* 建立第一個grid 定義他的column 、 row 數量 與數值，以及透過areas定義區域來供稍後section對應放入   (後續會因需求新增更多grid 如以下) */
+  .txt2img-first-grid{
+    display: grid;
+    grid-template-columns:1fr;
+    grid-template-rows: 1fr 1fr ;
+  
+    grid-template-areas: 
+    "gridline"
+    "section2 "
+  
+  ;
+  
+    grid-gap: 10px;
+    margin-bottom: 60px;
+  }
+  
+  .grid-line {
+    grid-area: gridline;
+    grid-column: 1 / -1; 
+    height: 2.5px;
+    background-color: rgb(230, 226, 226);
+    box-shadow: 5px 2.5px 10px rgba(0, 0, 0, 0.3); 
+
+  
+  }
+  
+  
+    /* 需放入的components 寫一section classname給他 而位置對應上方剛建立grid 的 areas */
+  
+    .txt2img-section2{
+      grid-area: section2;
+      justify-self: start;
+      display: none;
+    }
+  
+  .txt2img-second-grid{
+  
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+  
+      grid-template-areas: 
+        "section3 section4"
+        "section5 section6"
+      ;
+  
+    }
+      .txt2img-section3{
+        width: 95%;
+        grid-area: section3;
+      justify-self: start;
+     }
+      .txt2img-section4{
+        grid-area: section4;
+      justify-self: start;
+     }
+      .txt2img-section5{
+        width: 95%;
+        grid-area: section5;
+        justify-self: start;
+     }
+     .txt2img-section6{
+      display: none;
+      grid-area: section6;
+      justify-self: start;
+      
+   }
+  
+  
+  .txt2img-third-grid{
+  
+      display: grid;
+      grid-template-columns: 25% 46%;
+      grid-template-rows: 1fr ;
+  
+      grid-template-areas: 
+        "section7 section8"
+  
+      ;
+      grid-gap: 100px;
+      margin-bottom: 40px;
+  
+    }
+     .txt2img-section7{
+      grid-area: section7;
+      justify-self: start;
+   }
+    .txt2img-section8{
+      width: 40%;
+      grid-area: section8;
+      justify-self: start;
+  
+   }
+  
+  .txt2img-fourth-grid{
+    display: grid;
+    grid-template-columns: 130px 100px 100px;
+    grid-template-rows: 1fr;
+  
+    grid-template-areas: 
+      "section9 section10 section11"
+    ;
+    grid-gap: 30px;
+  }
+    .txt2img-section9{
+    grid-area: section9;
+    justify-self: start;
+  }
+    .txt2img-section10{
+    grid-area: section10;
+    justify-self: start;
+  }
+    .txt2img-section11{
+    grid-area: section11;
+    justify-self: start;
+  }
+  
+  .txt2img-fifth-grid{
+    display: grid;
+    grid-template-columns: 33% 46%;
+    grid-template-rows: 1fr 1fr;
+  
+    grid-template-areas: 
+      "section12 section13"
+      "section14 section15"
+    ;
+    grid-gap: 10px;
+  }
+  
+    .txt2img-section12{
+    width: 95%;
+    grid-area: section12;
+    justify-self: start;
+  }
+    .txt2img-section13{
+    width: 30%;
+    grid-area: section13;
+    justify-self: start;
+  }
+    .txt2img-section14{
+      width: 95%;
+    grid-area: section14;
+    justify-self: start;
+  }
+    .txt2img-section15{
+    width: 30%;
+    grid-area: section15;
+    justify-self: start;
+  }
+  
+  .txt2img-sixth-grid{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+  
+    grid-template-areas: 
+      "section16"
+    ;
+    grid-gap: 10px;
+  }
+    .txt2img-section16{
+      width: 47.1%;
+      grid-area: section16;
+      justify-self: start;
+    }
+  
+  .txt2img-seventh-grid{
+      display: grid;
+      grid-template-columns:41% 50px 50px;
+      grid-template-rows: 1fr;
+      
+      grid-template-areas: 
+        "section17 section18 section19"
+      ;
+      grid-gap: 30px;
+    }
+  
+    .txt2img-section17{
+      width: 99%;
+      grid-area: section17;
+      justify-self: start;
+    }
+      .txt2img-section18{
+      grid-area: section18;
+      justify-self: start;
+      align-self: center;
+    }
+      .txt2img-section19{
+      grid-area: section19;
+      justify-self: start;
+      align-self: center;
+    }
+  
+  
+  .PromptStyle,
+  .DropBoxStyle,
+  .SliderStyle,
+  .CheckBoxStyle,
+  .ButtonStyle {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .PromptStyle {
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .DropBoxStyle {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: left;
+  }
+  
+  .SliderStyle {
+    background-color: #eaeaea;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .CheckBoxStyle {
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  
+  /* .ButtonStyle {
+    text-align: center;
+  } */
+  
+  
+  .ButtonStyle button {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .ButtonStyle button:hover {
+    background-color: #0056b3;
+  }
+
+  .txt2img-tempDemo-grid{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+  
+    grid-template-areas: 
+      "tempDemo"
+    ;
+    grid-gap: 30px;
+  }
+
+  .txt2img-tempDemo{
+    width: 99%;
+    grid-area: tempDemo;
+    justify-self: start;
+  }

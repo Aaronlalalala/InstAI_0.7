@@ -1,0 +1,33 @@
+.button_common {
+    background-color: #6d51ee !important; 
+    color: white !important;
+    padding: 15px 30px;
+    border: none;
+    font-size: 16px;
+    border-radius: 10px;
+    width: 96.7%;
+    margin: 2% 1.5%;
+}
+
+.button_common:hover {
+    background-color: #301293 !important; 
+    color: white !important;
+}
+
+.error {
+    color: red;
+    text-align: left;
+    margin: auto;
+    font-size: 16px;
+    padding: 0px 1rem;
+}
+.button_firstpage {
+    background-color:  rgb(0, 0, 0);
+    color: white;
+    padding: 15px 10px;
+    border: none;
+    font-size: 20px;
+    border-radius: 15px;
+    margin: 1rem;
+    width: 30%;
+}

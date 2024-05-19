@@ -1,0 +1,36 @@
+
+
+
+
+.imgPreviews{
+  border: 1px solid #dddfe2;
+  width: auto;
+  display: inline-block;
+  
+}
+
+  .downloadSingleImg{
+    margin-right: 10px;
+  }
+
+  .downloadDelete{
+    margin: 10px;
+  }
+  
+  .downloadDiv{
+    flex-wrap: wrap;
+  }
+
+
+
+
+.downloadform{
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(to bottom, #9984f6 0%, #6d51ee 100%, #ffffff 100%);
+  padding: 10px;
+  margin: 30px auto;
+  margin-top: 2vh;
+  height: 400px;
+}

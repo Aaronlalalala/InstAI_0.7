@@ -1,0 +1,208 @@
+/* 中間首頁框 */
+
+position: absolute;
+width: 707px;
+height: 319px;
+left: 369px;
+top: 305px;
+
+
+
+/* 首頁框 */
+
+position: absolute;
+width: 707px;
+height: 319px;
+left: 369px;
+top: 305px;
+
+background: #FFFFFF;
+
+
+/* text................................. ........................................ */
+
+position: absolute;
+width: 449px;
+height: 40px;
+left: 401px;
+top: 378px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 700;
+font-size: 32px;
+line-height: 39px;
+
+color: #323B92;
+
+
+
+/* 註冊button */
+
+position: absolute;
+width: 139px;
+height: 48px;
+left: 401px;
+top: 546px;
+
+
+
+/* Rectangle 4 */
+
+position: absolute;
+width: 139px;
+height: 48px;
+left: 401px;
+top: 546px;
+
+background: #323B92;
+
+
+/* Register */
+
+position: absolute;
+width: 83px;
+height: 24px;
+left: 429px;
+top: 558px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 700;
+font-size: 20px;
+line-height: 24px;
+
+color: #FFFFFF;
+
+
+
+/* instai_icon 1 */
+
+position: absolute;
+width: 222px;
+height: 222px;
+left: 819px;
+top: 348px;
+
+background: url(instai_icon.png);
+
+
+/* InstAI */
+
+position: absolute;
+width: 161px;
+height: 68px;
+left: 401px;
+top: 324px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 700;
+font-size: 55px;
+line-height: 67px;
+
+color: #323B92;
+
+
+
+/* 登入button */
+
+position: absolute;
+width: 139px;
+height: 48px;
+left: 562px;
+top: 546px;
+
+
+
+/* login */
+
+position: absolute;
+width: 139px;
+height: 48px;
+left: 562px;
+top: 546px;
+
+background: #323B92;
+
+
+/* login */
+
+position: absolute;
+width: 55px;
+height: 24px;
+left: 604px;
+top: 558px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 700;
+font-size: 20px;
+line-height: 24px;
+
+color: #FFFFFF;
+
+
+
+function FrontPage(){
+    return(
+    <div className={loginstyle.login}>
+        <div className = {loginstyle.logo}> InstAI</div>
+        
+        <button className={loginstyle.button_common}>
+            <NavLink to="/Login">
+                Login
+            </NavLink>
+        </button>
+        
+        <button className={loginstyle.button_common}>
+            <NavLink to="/signup">
+                Register
+            </NavLink>
+        </button>
+
+    </div>
+    );
+}
+
+
+
+.login {
+    height:350px;
+    width: 400px;
+    background: #ffffff;
+    border: 2px solid #ffffff;
+    box-shadow: 0 2px 4px rgba(254, 254, 254, 0.64), 0 8px 16px rgba(0, 0, 0, 0.34);
+    border-radius: 12px;
+    padding: 1rem;
+    align-items: first baseline;
+    text-align:center
+    
+}
+.logo {
+    color:rgb(0, 0, 0);
+    position:absolute;
+
+    
+
+}
+.button_common {
+    background-color: rgb(0, 0, 0);
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    font-size: 20px;
+    border-radius: 15px;
+    margin: 1rem;
+    width: 50%;
+}
+.login > form input {
+    border-radius: 20px;
+    border: 10px solid rgb(0, 0, 0);
+    outline: none;
+    color: #ffffff;
+    margin: 2% 0;
+    width: 90%;
+    padding: 12px;
+    font-size: 16px;
+}

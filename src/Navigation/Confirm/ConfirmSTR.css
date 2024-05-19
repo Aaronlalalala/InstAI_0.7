@@ -1,0 +1,45 @@
+
+.data-preview {
+  margin-top: 20px;
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.view-form{
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(to bottom, #9984f6 0%, #6d51ee 12%, #ffffff 12%);
+  padding: 10px;
+  margin: 30px auto;
+  margin-top: 10vh;
+}
+
+.viewButton{
+  left: 75px;
+  background-color: #6f00ff;
+  color: white !important;
+ }
+
+ .viewButton:hover{
+  background-color: #4e05af;
+   color: white !important;
+ }
+
+
+ .confirmButton{
+  background-color: #6f00ff;
+  color: white !important;
+ }
+
+ .confirmButton:hover{
+  background-color: #4e05af;
+   color: white !important;
+ }
+
+ .custom-border {
+  border-bottom: 2.5px solid rgb(230, 226, 226); 
+  box-shadow: 5px 2.5px 10px rgba(0, 0, 0, 0.2); 
+}

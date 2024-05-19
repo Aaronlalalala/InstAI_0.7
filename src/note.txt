@@ -1,0 +1,288 @@
+一. 選擇標註方式 
+1.object detection with bounding boxes 
+2.semantic segmentation with polygons
+3.semantic segmentation with masks
+
+二. configure data 資料取用
+format : use img from <set manually> ${image}
+
+三. label name 標籤名字
+可以增加標籤的名字 並且用顏色區分
+
+四. configure setting 
+1. img zoom
+2. control for zoom in and zoom out
+3. rotate img 
+4. display label => 統一先放page bottom 
+5. add filter for long list of labels 
+
+~~~~使用bounding box 做示範~~~~~~~~
+五. start for label img
+1. click label name and set the region on photo 
+2. 操作上 由小至大 
+3. if the label are finish and user is continue to label another object ,former label can be locked.(非常重要)
+4. 可以跳過照片不進行標註操作 分成skip || update 
+5. 左上角有跳回去的按鈕 只對以操作過的進行資料跳躍 => 只對已經selectFiles進行二次操作
+6. 依照圖片上傳順序進行命名
+7. skip 在console 裡面為2 update 為 1 並且會顯示在預覽操作頁面 顯示圖片的處理
+
+五. 預覽操作葉面
+1. 針對實際有label的圖片 會顯示complete 
+2. id = 上傳的順序 
+3. 預覽方式分為List 以及 grid => 線性布局以及格式布局 
+4. 可以依照照片的狀態進行排列 包括是否完成標註,操作的狀態
+
+六. 輸出顯示
+1. 格式: json , json-min , csv , tsv , coco
+2. 輸出後之json檔案會顯示多種操作 包括id , annotations(操作完成是使用update || skip) 以及原本圖片的長寬 使否有圖片旋轉 標註的x ,y,長度,寬度
+標註方式,使用的標籤的名字,上傳時間,操作完成時間
+
+
+4/9 
+生圖那邊 (imgdisplaypage)
+1. 現在點任何一張的select 會讓圖片顯示全部改成batch1的圖片 (看起來應該是因為useffect)
+2. 因為現在生圖前面的流程還沒有create project 沒有帶專案名稱到url 查詢字串
+   所以會是往一個名稱為空的project去上傳圖片
+3. try again 裡面剩餘次數現在是寫死的 會需要再串後端的count
+4.新增adminPage
+5.連結彥君的後端版本功能
+6.生徒新流程 => 選擇img generation => 先創建新專案 => 將projectname 導入到img generation process 可以讓圖片直接傳入
+
+
+4/10 note
+確認navigate路徑正確性 
+0.5版本
+1. 創建專案 Create.js 先獲取專案名字 => 回到project.js選取專案 跳入/Step?project=${projectName} => 上傳圖片/UploadImg?projectname=${projectname} 做完之後跳回/Step?project=${projectname}
+=> 上傳需求 跳轉至/Requirment?projectname=${projectname} => 傳送完畢跳回/Step?project=${projectname} => 跳入confirmImg.js的/ConfirmImg?projectname=${projectname} =>後續步驟不贅述
+
+confirm path 
+1. ConfirmImg.js獲取projectname 並將const projectname_confirm1 = projectname => 2. ModelSelectionPage.js 抓取projectname_confirm1 => 3. PromptInputPage.js維持projecyname_confirm1 => imgdisplaypage.js 維持projectname_confirm1
+ => 回傳至confirmImg.js?projectname=${projectname}
+
+ img normal path
+ 1. CreateProjectPage.js選擇imgGeneration => 2.Create.js創建專案名稱 projectname => 3. ModelSelectionPage轉換成projectname_process2 => 4.PromptInputPage維持projectname_process2
+ => 5.ImgDisplayPage.js維持projectname_process2 => 傳入對應的後端api => navigate到/Step?project=${projectname_process2}  注意: /Step?project=${projectname}
+
+ 但是還是有點小問題 requirement傳送會有問題
+
+
+ 4/28 
+ 1-1. Project將根據type顯示不同顏色(模型訓練、圖片生成)
+ ans : 先在createProjectPage依據選擇的模型類別進行location.state繼承 並且在create.js中將type打入formData 方便project.js中讀取type的數值 
+ 若1則為diffision datatest  ，2則是normal datatest
+ 1-2. 圖像生成部分根據後端提供之Base64資訊來顯示生成圖片，而非透過前端暫存
+ ans : 在modelSelection.js 78行中已經解決
+ 1-3. Project需記錄當前status，並於點選時進入當前project的狀態
+ 1-4. Internal user介面: a.顯示所有project page b.單一project上傳模型page	
+ 1-5. 圖像生成Skip	
+
+
+
+ 5/1
+ 進程流程
+ 1. CreateProjectPage => Image generation => createPage => ModelSelectionPage => PromptInputPgae => ImgDisplayPage => Project => Step => 舊有流程
+ 2. CreateProjectPage => Model traning    => CreatePage => Project => 舊有流程
+
+流程補償
+第一條路徑中 若是使用者已經在createPage中已經創立image generation類型的專案 並且在modelSelecitonPage或者是promptInputPage中沒有使用count就先跳出流程
+要重新回去訓練的時候點選該專案 要先進入modelSelectionPage重新先完成生圖的步驟 至少要 count < 4  並且再繼續進行專案步驟
+
+
+function plan 
+
+為解決目前專案中最重要的確認status問題，使用一個固定funciton接收index並且搭配useEffect更新status 
+監聽後要送出response到confirmStep中修改該專案的status 並且使用後端回傳的status進行專案狀態確認
+
+const step = useState(); // 預設空
+function a (index status) =>{
+   執行狀態修正
+
+   await.axios.post(必要資料=> ConfirmStep api)
+
+   await.axios.get(必要資料=> getStep api) 
+}
+useEffect(()=>{
+   確認state正確更新
+},[依賴項目及function])
+
+涉及頁面 : confirmIMG , confirm Req , Step ,UploadImg , Requirment ;
+
+
+哲倫的心血 
+  const changeStep = async(status_now) =>{
+    try {
+      const token = localStorage.getItem('jwtToken');
+      const formData = {step:status_now, projectname : projectname, username: userid}; 
+      const response = await axios.post(
+        `${c_s}`,formData,
+         {
+          headers: {
+            'Content-Type':'application/json',
+            'Authorization': `Bearer ${token}`
+          }
+        });
+      console.log(response.data);
+      setStatus(response.data);
+      setStep(statusToStep[status]);
+    } catch (error) {
+      console.error('Error fetching data:', error);}}
+
+
+
+
+5/13 天俊更新:
+
+1.Step page 整個page改成 bootstrap 響應式
+ 1-1. 左邊left bar 改成對應當前步驟才會顯示紫色提示
+ 1-2. Start training card新增一個進度條 提示使用者當前訓練進度
+        包含 a. in process & completed
+ 1-3. 中間多一個card來顯示該專案的模型資訊 並有兩個button
+      a.Download (已實作)
+      b.Testing (Inference 尚未實作)
+
+2. UploadImg Page & ViewImg Page UI/UX更新
+
+3.  Requirement Page & ViewReq Page UI/UX 更新，以及修正可能會顯示upload req error 403的問題
+
+4.  Img Confirm & Req Confirm Page UI/UX 更新，修正Req Confirm 修改Req內容後，可能沒有即時渲染成更新後的內容的現象
+
+因為app組的學長在開發 所以很難找到這兩個requset 所以我就放在這裡
+cd InstAI-SD
+bash webui.sh --share --listen --api --disable-safe-unpickle
+
+5/14 哲倫更新: 
+
+1. img generation page : chance 未用盡卻跳出 也並沒有confirm進入下一個status時應該如何設計
+ 1-1. 在專案要進行圖片生成時 會需要以下參數 (1)projectname (2)remaing count (3)check point (4)promtData 因此經過考慮後進行以下規劃
+ 1-2. 在project.js時會進行以下判斷 1. 判別專案進度(status) => 若是專案為image generation 則判斷localSotage是否有存取check point 若是有則繞回PromptInputPage並繼續進行生圖 直到remaing count用完或者是使用者確定送出
+ 1-3. 若是確定有checkPoint 會在Prompt.js時進入專案前 先將點擊projectCard的專案名稱提取為traing name 並且會對後端提取reaming  count 至於promptData 則可以重新在promptInputPage生成就好
+ 
+      if(isProjectInLocalStorage) {
+        if(status === "Image generation"){
+          const newProjectname = projectName
+          localStorage.setItem("traing name",newProjectname);
+          //若是checkPoint存在 則跳轉到PromptInputPage避免存取到風格不同模型生成的圖種
+          if(cehckPoint){
+            navigate(`/PromptInputPage`);
+            return;
+          }
+          navigate(`/ModelSelectionPage?project=${projectName}`);
+        }else{
+          // status != 0 已經到生成圖片後面的進度
+          const newType = 1
+          setDiffusionType(newType)
+          navigate(`/Step?project=${projectName}`);
+        }
+      }else { 
+        const newType =2
+        setDiffusionType(newType);
+        navigate(`/Step?project=${projectName}`);
+      }
+     catch (error) {
+      alert('目前遇到錯誤');
+    }
+
+
+2. 針對count在專案中抓取的問題 
+ 2-1. 從後端抓取type 1 專案對應剩下的remaing count => 
+
+   const g_c  = process.env.REACT_APP_GET_IMGCOUNT
+
+  const getCount = async (projectname) => {
+    try {
+      const token = localStorage.getItem('jwtToken');
+  
+      const response = await axios.get(`${g_c}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        params: { projectname: projectname, username: id }
+      });
+  
+      console.log("response data is", response.data);
+      if (response.data === 'error') {
+        throw new Error('Error fetching data');
+      }
+      console.log(response.data);
+      let chance = response.data.img_generation_remaining_count;  
+      console.log(chance);
+      return chance ; 
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      throw error;
+    }
+  };
+
+  2-2. 修改type1專案所剩餘的remaing count 
+  
+   const m_c = process.env.REACT_APP_MODIFY_IMGCOUNT;
+
+   const modifyCount = async (projectname, count) => {
+    try {
+      const token = localStorage.getItem('jwtToken');
+      const data = { username: id, projectname: projectname, count: count-1 };
+      const response = await axios.post(`${m_c}`, data, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      console.log("Response data is", response.data);
+      if (response.data === 'error') {
+        throw new Error('Error fetching data');
+      }
+      console.log(response.data);
+      getCount(projectname); // 在修改計數後，重新獲取計數
+      return data;
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      throw error;
+    }
+  };
+  
+
+3. img generation batch 存取圖片問題
+ 3-1. 先使用Base64 進行資料的存取 總共會有四個Base64Img
+ 分別是以下這四個 並且select的時候也是針對image裝取的Baes64-i去確定 所以解決了非同步選取的問題 
+ for (let i = 1; i <= 4; i++) {
+          localStorage.removeItem(`${projectName}Base64Data-${i}`);
+        }
+
+4. 用於檢查所有localStorage存取資料的code 
+ useEffect(() => {
+   // test
+   for (let i = 0; i < localStorage.length; i++){
+     let key = localStorage.key(i);
+     console.log(`${key}: ${localStorage.getItem(key)}`);}
+  },[])
+
+5. 我發現如果連線進入ec2主機之中執行
+cd InstAI-SD
+bash webui.sh --share --listen --api --disable-safe-unpickle
+抓取好像會有時間限制 如果主機維持命令太久 會抓取不到資料 
+
+
+6. 抓取s3 bucket 的資料
+
+const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+  const url = "https://instaiweb-bucket.s3.amazonaws.com/uploads/3/1234/SDImages/SDImages1.json"; // 你的 JSON 文件 URL
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const json = await response.json();
+        setData(json);
+        console.log("data is",json);
+      } catch (error) {
+        setError(error);
+      }
+    };
+
+    fetchData();
+  }, [url]);

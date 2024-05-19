@@ -1,0 +1,28 @@
+
+
+.requirement-form{
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(to bottom, #9984f6 0%, #6d51ee 15%, #ffffff 15%);
+  padding: 10px;
+  margin: 30px auto;
+  margin-top: 10vh;
+  height: 400px
+}
+
+  .submitButton{
+    background-color: #6f00ff;
+   color: white !important;
+  }
+
+  .submitButton:hover{
+    background-color: #4e05af;
+    color: white !important;
+  }
+
+.requirement-title {
+  color: rgb(236, 236, 236);
+
+}
+

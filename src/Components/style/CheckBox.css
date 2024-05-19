@@ -1,0 +1,29 @@
+
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .checkbox-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    border: 2px solid #007bff;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .checkbox-icon.checked {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .checkbox-label {
+    font-size: 16px;
+    color: #333;
+  }
+  

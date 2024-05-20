@@ -6,7 +6,7 @@ import { useNavigate, NavLink } from "react-router-dom";
 import InstAI_icon from '../../image/iconnew.png'
 import { jwtDecode } from 'jwt-decode'
 import MeteorShower from "./MeteorShower";
-import backgroundImg from "../../image/background.jpg";
+import backgroundImg from "../../image/background-1.png";
 
 const Login = ({ setUserState }) => {
   const navigate = useNavigate();

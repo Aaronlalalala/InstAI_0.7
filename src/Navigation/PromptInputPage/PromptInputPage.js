@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { NavLink, useNavigate} from "react-router-dom";
 import { Navbar, Nav, Container, Button, Form } from "react-bootstrap";
-import InstAI_icon from "../../image/instai_icon.png";
+import InstAI_icon from "../../image/iconnew.png";
 import { FaRegClock } from 'react-icons/fa';
 // import Autosuggest from 'react-autosuggest';    之後可以加入一些提示詞語 方便下更好的prompt
 import "./PromptInputPage.css";
@@ -74,7 +74,7 @@ export default function ImgPrompt() {
     getCount(projectName);
   }, []);
   
-  console.log("project name is",projectName," model title is",modelTitle);
+  // console.log("project name is",projectName," model title is",modelTitle);
 
   const [formData, setFormData] = useState({
     enable_hr: false,
@@ -204,7 +204,7 @@ export default function ImgPrompt() {
             <NavLink to={`/Project?&type=1`} className="mx-auto">
               <img
                 src={InstAI_icon}
-                width="60"
+                width="200"
                 height="60"
                 className="d-inline-block align-top"
                 alt="InstAI logo"

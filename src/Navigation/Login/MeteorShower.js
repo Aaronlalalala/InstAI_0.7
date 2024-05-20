@@ -11,9 +11,9 @@ const MeteorShower = () => {
     canvas.width = windowWidth;
     canvas.height = windowHeight;
 
-    const starCount = 30;
+    const starCount = 30; // 星星數量
     const arr = [];
-    const rainCount = 12;
+    const rainCount = 12; // 流動數量
     const rains = [];
 
     class Star {

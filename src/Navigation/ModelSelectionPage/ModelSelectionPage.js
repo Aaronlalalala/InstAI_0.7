@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation, NavLink } from "react-router-dom";
 import axios from "axios"
-import InstAI_icon from "../../image/instai_icon.png";
+import InstAI_icon from "../../image/iconnew.png";
 import { Navbar, Nav, Container, Row, Col, Card, Button } from 'react-bootstrap';
 //圖像生成部分根據後端提供之Base64資訊來顯示生成圖片，而非透過前端暫存
 
@@ -107,6 +107,8 @@ export default function ModelStyle() {
       console.log(response.data);
     }
   };
+
+
   return (
     <div style={{ backgroundColor: 'white' }}>
       <Navbar style={{ backgroundColor: 'WHITE', boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)' }}>
@@ -114,7 +116,7 @@ export default function ModelStyle() {
           <div className="col-auto mt-4">
             <NavLink to={`/Project?&type=1`} className="CreateProjectPageLink">
               <button className="btn createprojectPageButton" style={{ marginLeft: "10px", fontFamily: 'Lato' }}>
-                <h3 style={{ marginLeft: "0px" }}>Back and save the progress</h3>
+                <h3 style={{ marginLeft: "0px" }}>←Back</h3>
               </button>
             </NavLink>
 
@@ -124,7 +126,7 @@ export default function ModelStyle() {
         <Navbar.Brand href="#home" className="mx-auto">
           <img
             src={InstAI_icon}
-            width="60"
+            width="200"
             height="60"
             className="d-inline-block align-top"
             alt="InstAI logo"

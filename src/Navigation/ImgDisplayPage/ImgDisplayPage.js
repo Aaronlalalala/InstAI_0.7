@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 import { Navbar, Nav, Card, Container, Row, Col, Button, Form } from "react-bootstrap";
-import InstAI_icon from "../../image/instai_icon.png";
+import InstAI_icon from "../../image/iconnew.png";
 import axios from "axios";
 import { FaRegClock } from "react-icons/fa";
 import './ImgDisplayPage.css'
 import AWS from 'aws-sdk';
-
+import Dropdown from 'react-bootstrap/Dropdown';
 export default function ImgDisplayPage() {
   const p = process.env; 
   const u = p.REACT_APP_UPLOAD; //最後傳送要用到的api
@@ -54,7 +54,7 @@ export default function ImgDisplayPage() {
           }
         });
       setStatus(response.data);
-      console.log("response data is", response.data);
+      // console.log("response data is", response.data);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -249,44 +249,7 @@ export default function ImgDisplayPage() {
     }
   };
   
-  // // 將base64字串轉換為Blob物件的函數
-  // function dataURLtoBlob(dataurl) {
-  //   let arr = dataurl.split(',');
-  //   if (arr.length < 2) {
-  //     throw new Error('Invalid data URL');
-  //   }
-  //   let mimeMatch = arr[0].match(/:(.*?);/);
-  //   if (!mimeMatch || mimeMatch.length < 2) {
-  //     throw new Error('Invalid data URL');
-  //   }
-  //   let mime = mimeMatch[1],
-  //       bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
-  //   while(n--){
-  //       u8arr[n] = bstr.charCodeAt(n);
-  //   }
-  //   return new Blob([u8arr], {type:mime});
-  // }
-
-  // function isValidDataURL(s) {
-  //   const regex = /^data:image\/([a-zA-Z]*);base64,([^\"]*)$/;
-  //   return !!s.match(regex);
-  // }
-  // let formData = new FormData();
-  // // 在迭代 selectImg 之前，先檢查每個元素
-  // selectImg.forEach((img, index) => {
-  //   if (!isValidDataURL(img)) {
-  //     console.error(`Image ${index} is not a valid data URL`);
-  //   } else {
-  //     // 如果是有效的，則繼續處理...
-  //     let blob = dataURLtoBlob(img);
-  //     formData.append('file', blob, `image${index}.jpg`);
-  //   }
-  // });
   
-  
-  
-  
-
   useEffect(() => {
     const url = `https://instaiweb-bucket.s3.amazonaws.com/uploads/${id}/${projectName}/SDImages/SDImages${num}.json`;
   
@@ -374,38 +337,43 @@ export default function ImgDisplayPage() {
   
 
   const LoadingCard = () => (
-    <div className="spinner"></div>
+    <div className="d-flex flex-column justify-content-center" style={{
+      minHeight: '60vh', maxWidth: '50rem', margin: '50px auto', backgroundColor: 'white',
+      borderRadius: '15px', boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)', padding: '20px'
+    }}>
+      <h2 className="text-center mb-4">We are fetching your data</h2>
+      <p className="text-center mb-4">Estimated time: </p>
+      <h2 className="text-center mb-4">3 minutes</h2>
+      <div className="text-center">
+        <FaRegClock style={{ animation: 'spin 12s linear infinite' }} size={70} />
+      </div>
+
+      <Button variant="primary" style={{ width: '50%', marginLeft: '25%', marginTop: "30px" }} onClick={handleChangeState}>
+        Cancel Request
+      </Button>
+      {/* <Button onClick={testButton}>測試</Button> */}
+    </div>
   );
+  
+  
 
 
   const NavBarCard = () => {
     return (
       <Navbar style={{ backgroundColor: 'WHITE', boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)' }}>
-        <Nav className="mr-auto" style={{ marginLeft: "10px" }}>
-          <div className="col-auto mt-4">
-          <NavLink to={`/Project?&type=1`} className="mx-auto">
+        <Container>
+          <Navbar.Brand className="mx-auto">
+            <NavLink to={`/Project?&type=1`}>
               <img
                 src={InstAI_icon}
-                width="60"
+                width="200"
                 height="60"
                 className="d-inline-block align-top"
                 alt="InstAI logo"
               />
             </NavLink>
-          </div>
-        </Nav>
-        <Nav className="ms-auto">
-          <div className="d-flex align-items-center mt-2">
-            <Button
-              variant="outline-primary"
-              onClick={resendPromptData}
-              className="me-2"
-              style={{ fontSize: "20px", height: "50px" }}
-            >
-              <FaRegClock /> Retry Prompt
-            </Button>
-          </div>
-        </Nav>
+          </Navbar.Brand>
+        </Container>
       </Navbar>
     );
   };
@@ -413,69 +381,36 @@ export default function ImgDisplayPage() {
     <>
       <NavBarCard />
       <Container>
-      <Row className="my-3 align-items-center">
-          <Col md={6}>
-            <h2>Project Name: {projectName}</h2>
-          </Col>
-          <Col md={6} className="text-md-end">
-            <h4>count left: {chance}</h4>
-          </Col>
+      <Row className="my-3 align-items-center" >
+      <Col md={12} className="text-center">
+          <h3>Project {projectName} have {chance} attempt left</h3>
+        </Col>
         </Row>
         {loading ? (
        <LoadingCard/>
       ) : (<>
-        <Row className="mb-3">
-         
-            <Col key={1}>
-              <Button
-                variant="outline-primary"
-                onClick={() => handleButtonClick(1)}
-                style={{ fontSize: "20px", height: "50px" }}
-              
-              >
-                Batch 1
-              </Button>
-            </Col>
+        <Row className="mb-3 ">
+  <Col md="auto">
+    <Dropdown onSelect={(eventKey) => handleButtonClick(parseInt(eventKey))}>
+      <Dropdown.Toggle variant="outline-primary" style={{ fontSize: "20px", height: "50px" }}>
+        Select Batch
+      </Dropdown.Toggle>
 
-            <Col key={2}>
-              <Button
-                variant="outline-primary"
-                onClick={() => handleButtonClick(2)}
-                style={{ fontSize: "20px", height: "50px" }}
-                disabled={chance >= 3 ? true : false}
-              >
-                Batch 2
-              </Button>
-            </Col>
+      <Dropdown.Menu>
+        <Dropdown.Item eventKey="1">Batch 1</Dropdown.Item>
+        <Dropdown.Item eventKey="2" disabled={chance >= 3}>Batch 2</Dropdown.Item>
+        <Dropdown.Item eventKey="3" disabled={chance >= 2}>Batch 3</Dropdown.Item>
+        <Dropdown.Item eventKey="4" disabled={chance >= 1}>Batch 4</Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
+  </Col>
+</Row>
 
-            <Col key={3}>
-              <Button
-                variant="outline-primary"
-                onClick={() => handleButtonClick(3)}
-                style={{ fontSize: "20px", height: "50px" }}
-                disabled={chance >= 2 ? true : false}
-              >
-                Batch 3
-              </Button>
-            </Col>
-
-            <Col key={4}>
-              <Button
-                variant="outline-primary"
-                onClick={() => handleButtonClick(4)}
-                style={{ fontSize: "20px", height: "50px" }}
-                disabled={chance >= 1 ? true : false}
-              >
-                Batch 4
-              </Button>
-            </Col>
-         
-        </Row>
           <Row className="mb-3">
            {base64Data.map((base64, index) => (
              <Col key={index} xs={12} md={6} lg={4} className="mb-3">
              <Card>
-             <Card.Img variant="top" src={`data:image/jpeg;base64,${base64}`} /> {/* 使用base64字串來顯示圖片 */}
+             <Card.Img variant="top" src={`data:image/jpeg;base64,${base64}`} loading="lazy" /> {/* 使用base64字串來顯示圖片 */}
              <Card.Body>
              <Card.Text>Image {index + 1}</Card.Text>
              <Button
@@ -497,21 +432,35 @@ export default function ImgDisplayPage() {
            </Col>
           ))}
          </Row>
+         
           </>
         )}
-        {selectImg.length > 0 && (
-          <Row className="mt-3 justify-content-center"> {/* 新增 justify-content-center */}
-          <Col md="auto"> {/* 修改為 md="auto" */}
-          <Button
-             variant="primary"
-             onClick={submitBatch}
-             style={{ fontSize: "20px", height: "50px" }}
-           >
-          Submit Batch
-          </Button>
-          </Col>
-          </Row>
-        )}
+        <Row className="mt-3 justify-content-center" style={{backgroundColor: '#f8f9fa', borderRadius: '5px', padding: '10px'}}>
+        <Col md="auto">
+    <Button
+      variant="outline-dark"
+      onClick={resendPromptData}
+      style={{ fontSize: "20px", height: "50px", backgroundColor: "white" }}
+    >
+      <FaRegClock /> Try again ({chance} attempt left)
+    </Button>
+  </Col>
+  {!loading && selectImg.length > 0 && (
+    <Col md="auto">
+      <Button
+        variant="primary"
+        onClick={submitBatch}
+        style={{ fontSize: "20px", height: "50px", backgroundColor: "#6c757d" }}
+      >
+        Use {selectImg.length} image(s) for model training
+      </Button>
+    </Col>
+  )}
+</Row>
+
+        
+        
+
 
       </Container>
     </>

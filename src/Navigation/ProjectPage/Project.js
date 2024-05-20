@@ -150,6 +150,7 @@ function Project() {
       const ProjectType = project.Type
       const status = await fetchstep(project.project_name);
       const chance = await getCount(project.project_name);
+      console.log(project.project_name);
       const checkPoint = localStorage.getItem(`${project.project_name} checkPoint`);
       // console.log("check point is",checkPoint);
       // console.log("status is",status);
@@ -157,7 +158,8 @@ function Project() {
       if(ProjectType ==="Image generation") {
         if(status === "Image generation"){
           const newProjectname = project.project_name
-          localStorage.setItem("traing name",newProjectname);
+          console.log("traing name",newProjectname);
+          localStorage.setItem("traing name is",newProjectname);
           //若是checkPoint存在 則跳轉到PromptInputPage避免存取到風格不同模型生成的圖種
           if (chance < 1){
             navigate(`/ImgDisplayPage`)
@@ -167,6 +169,7 @@ function Project() {
               navigate(`/PromptInputPage`);
               return;
             }
+
             navigate(`/ModelSelectionPage`);
             return;
           }

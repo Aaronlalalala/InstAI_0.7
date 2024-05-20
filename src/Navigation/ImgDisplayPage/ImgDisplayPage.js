@@ -74,7 +74,7 @@ export default function ImgDisplayPage() {
           'Authorization': `Bearer ${token}`
         }
       });
-      console.log(response.data);
+      // console.log(response.data);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -90,7 +90,7 @@ export default function ImgDisplayPage() {
         },
         params: { projectname: projectname, username: id }
       });
-      console.log("response data is", response.data);
+      // console.log("response data is", response.data);
       if (response.data === 'error') {
         throw new Error('Error fetching data');
       }
@@ -116,7 +116,7 @@ export default function ImgDisplayPage() {
           'Authorization': `Bearer ${token}`
         }
       });
-      console.log("Response data is", response.data);
+      // console.log("Response data is", response.data);
       if (response.data === 'error') {
         throw new Error('Error fetching data');
       }
@@ -129,8 +129,8 @@ export default function ImgDisplayPage() {
 
   // 傳送prompt進行生圖
   const postSDimg = async (promptData) => {
-    console.log("current chance is", chance);
-    console.log(`currnet num is ${num}`)
+    // console.log("current chance is", chance);
+    // console.log(`currnet num is ${num}`)
     if (chance > 0) {
       setLoading(true);
       try {
@@ -142,7 +142,7 @@ export default function ImgDisplayPage() {
           }
         });
 
-        console.log(response.data);
+        // console.log(response.data);
         await modifyCount(projectName, chance); // 送出的同時修改count 
         await getCount(projectName); // 修改後重新裝取新的count value 
 
@@ -196,12 +196,12 @@ export default function ImgDisplayPage() {
   };
   
   const submitBatch = () => {
-    console.log(selectImg)
+    // console.log(selectImg)
     const confirm = window.confirm("Sure to go to next step for model traing");
     if (!confirm) {
       return;
     } else {
-      console.log(selectImg);
+      // console.log(selectImg);
       const token = localStorage.getItem('jwtToken');
   
       // 建立一個新的FormData物件
@@ -234,7 +234,7 @@ export default function ImgDisplayPage() {
           'Authorization': `Bearer ${token}`
         }
       }).then(response => {
-        console.log(response.data);
+        // console.log(response.data);
         if (response.data.message === 'Image uploaded successfully!') {
           setLoading(true);
           changeStep("Image upload");
@@ -321,12 +321,12 @@ export default function ImgDisplayPage() {
       try {
         await checkFileExistence();
         const response = await fetch(url);
-        console.log( `fetching ${url}`)
+        // console.log( `fetching ${url}`)
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
         const json = await response.json();
-        console.log("抓到這些資料",json);
+        // console.log("抓到這些資料",json);
         setBase64Data(Object.values(json)); // 將所有的base64字串存入base64Data
       } catch (error) {
         alert("data is empty");
@@ -351,7 +351,7 @@ export default function ImgDisplayPage() {
 
     pollForFile();
 
-    console.log(`current num = ${num}`)
+    // console.log(`current num = ${num}`)
 
     
   }, [num]);
@@ -369,7 +369,7 @@ export default function ImgDisplayPage() {
   };
   
   useEffect(()=>{
-    console.log("選了這些",selectImg);
+    // console.log("選了這些",selectImg);
   },[handleCheck])
   
 

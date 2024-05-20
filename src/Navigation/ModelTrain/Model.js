@@ -15,7 +15,7 @@ function Model(){
   const p = process.env;
   const [step , setStep]=useState('');
 
-  console.log("project name is ",projectname);
+  // console.log("project name is ",projectname);
   useEffect(()=>{
 
   },[])

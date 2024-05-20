@@ -5,7 +5,8 @@ import axios from "axios";
 import { useNavigate, NavLink } from "react-router-dom";
 import InstAI_icon from '../../image/iconnew.png'
 import { jwtDecode } from 'jwt-decode'
-
+import MeteorShower from "./MeteorShower";
+import backgroundImg from "../../image/background.jpg";
 
 const Login = ({ setUserState }) => {
   const navigate = useNavigate();
@@ -39,7 +40,7 @@ const Login = ({ setUserState }) => {
               axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
               const remove = "Success";
               const id = response.data.message.replace(remove, "");
-              console.log(decoded);
+              // console.log(decoded);
               localStorage.setItem("Role", decoded.role);
               console.log("Admin login detected!");
               navigate("/AdminOverView", { state: id});
@@ -113,20 +114,26 @@ const Login = ({ setUserState }) => {
   
 
   return (
-    <Fragment>
+    <div style={{
+      backgroundImage: `url(${backgroundImg})`,
+      backgroundSize: 'cover',
+      height: '100vh',
+      width: '100vw',
+      position: 'fixed', // 修改為 fixed 以固定背景
+      overflow: 'hidden' // 添加此行以禁止滾動
+    }}>
+  <MeteorShower />
+    <React.Fragment>    
      <div className="container"  style={{marginTop:"30vh"}}>
-        <div className="row">
-          <div className="col-md-3 mx-auto"> 
-            <img src={InstAI_icon} className="img-fluid" alt="InstAi_Icon" ></img>
-          </div>
-        </div>
-       
-        <div className="row" >
-          <div className="col-md-5  mx-auto"> 
+     <div className="row">
+          <div className="col-md-5 mx-auto">
+            <div className={`card rounded-5 ${loginstyle.logincard}`}>
+              <div className="text-center">
+              <img src={InstAI_icon} className="img-fluid" alt="InstAi_Icon" style={{ width: '150px', height: 'auto' }}></img>
 
-         <div className={`card rounded-5 ${loginstyle.logincard}`} >
-            <div className="card-body">
-          <h3 className="card-title text-center " style={{fontWeight:'bold'}}>Sign in</h3>
+              </div>
+              <div className="card-body">
+          <h3 className="card-title text-center" style={{ fontWeight: 'bold' }}>Sign in</h3>
           <form onSubmit={loginHandler}>
            <label className="form-label fs-6 mt-2 mb-1 fw-bold">Email</label>
            <input
@@ -157,13 +164,14 @@ const Login = ({ setUserState }) => {
          </form>
             </div>
             </div>
-            <div className="text-center mt-3">
+            <div className="text-center mt-3 " style={{ color: 'white' }}>
               Have questions? Send email to <b>support@instai.co</b>
             </div>
           </div>
         </div>
       </div>
-    </Fragment>
+    </React.Fragment>
+    </div>
   );
 
 };

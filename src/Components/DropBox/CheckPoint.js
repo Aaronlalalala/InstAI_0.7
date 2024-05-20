@@ -19,7 +19,7 @@ function CheckPoint({ value, onChange }) {
         //alert('Filenames loaded successfully');
       })
       .catch((error) => {
-        console.error(error);
+        // console.error(error);
         console.error('文件讀取失敗');
       });
   }, []);

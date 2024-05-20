@@ -40,7 +40,7 @@ function ViewReq() {
   }, [id, projectname]);
 
   const handleGoBack = () => {
-    console.log("已經檢查需求");
+    // console.log("已經檢查需求");
     navigate(`/Step?project=${projectname}`);
   };
 

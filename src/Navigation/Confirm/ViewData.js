@@ -34,10 +34,10 @@ function ViewData() {
           'Authorization': `Bearer ${token}`
         }
       });
-      console.log('Response from backend:', response.data);
+      // console.log('Response from backend:', response.data);
 
       if (response.data.images && Array.isArray(response.data.images)) {
-        console.log('Received images:', response.data.images);
+        // console.log('Received images:', response.data.images);
         setImagePreviews(response.data.images);
       } else {
         console.error('Invalid response format from backend:', response.data);
@@ -98,7 +98,7 @@ function ViewData() {
 
 
   const handleGoBack = () => {
-    console.log("檢查");
+    // console.log("檢查");
     navigate(`/Step?project=${projectname}`);
   };
   // const handleUpload = async () => {

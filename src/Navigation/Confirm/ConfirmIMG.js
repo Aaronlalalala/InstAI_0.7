@@ -27,13 +27,13 @@ function ConfirmImg() {
         params: { projectname: projectname, username: id }
       });
   
-      console.log("response data is", response.data);
+      // console.log("response data is", response.data);
       if (response.data === 'error') {
         throw new Error('Error fetching data');
       }
-      console.log(response.data);
+      // console.log(response.data);
       let chance = response.data.img_generation_remaining_count;  
-      console.log(chance);
+      // console.log(chance);
       return chance ; 
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -52,7 +52,7 @@ function ConfirmImg() {
   const upload_deleteimg = p.REACT_APP_UPLOAD_DELETEIMG;
   const u = process.env.REACT_APP_UPLOAD;
   const confirm_img = p.REACT_APP_AWS_CONFIRM_IMG;
-  console.log("現在狀態", confirmed2);
+  // console.log("現在狀態", confirmed2);
 
   const fetchData = async () => {
     try {
@@ -63,7 +63,7 @@ function ConfirmImg() {
           'Authorization': `Bearer ${token}`
         }
       });
-      console.log(response.data.images);
+      // console.log(response.data.images);
       setImagePreviews(response.data.images);
       setLoading(false);
     } catch (error) {
@@ -76,7 +76,7 @@ function ConfirmImg() {
 
   const handleDeleteImage = async (index) => {
     const pn = projectname
-    console.log(pn)
+    // console.log(pn)
     const confirmDelete = window.confirm('確定要刪除圖片?');
     if (!confirmDelete) {
       return;
@@ -87,7 +87,7 @@ function ConfirmImg() {
     setImagePreviews(updatedPreviews);
     try {
       const token = localStorage.getItem("jwtToken");
-      console.log(pn)
+      // console.log(pn)
       await axios.post(`${upload_deleteimg}?username=${id}&projectname=${pn}`, { filename: deletedImage },{
         headers: {
           'Content-Type': 'application/json',
@@ -186,7 +186,7 @@ function ConfirmImg() {
             'Authorization': `Bearer ${token}`
           }
         });
-      console.log(response.data);
+      // console.log(response.data);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -206,7 +206,7 @@ function ConfirmImg() {
       for (let i = 0; i < selectedFiles.length; ++i) {
         formData.append('file', selectedFiles[i]);
       }
-      console.log(selectedFiles.length);
+      // console.log(selectedFiles.length);
       try {
         const token = localStorage.getItem('jwtToken');
         const response = await axios.post(
@@ -219,7 +219,7 @@ function ConfirmImg() {
             }
           }
         );
-        console.log(response.data);
+        // console.log(response.data);
         alert('Upload success');
         setSelectedFiles([]);
         setImagePreviews2([]);
@@ -239,7 +239,7 @@ function ConfirmImg() {
     } else {
       if (chance > 0) {
         const projectname_confirm1 = projectname
-        console.log(projectname_confirm1);
+        // console.log(projectname_confirm1);
         navigate(`/ModelSelectionPage?project=${projectname}`, { state: { projectname_confirm1 } });
       }
       console.log("沒次數還想生圖鴉 ? ");

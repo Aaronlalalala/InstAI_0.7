@@ -21,8 +21,8 @@ function Create() {
 
   const type_project = location.state.typeOfProject;
   const typeString = type_project === 2 ? "AI Model training" : "Image generation";
-  console.log("project type is",type_project);
-  console.log("project type string is ", typeString)
+  // console.log("project type is",type_project);
+  // console.log("project type string is ", typeString)
 
   const [formData, setFormData] = useState({
     projectName: "",
@@ -43,13 +43,6 @@ function Create() {
             'Authorization': `Bearer ${token}`
           }
         });
-        // // 預設會有type在response.data裡面
-        // // console.log(response.data);
-        //  const combinedProjects = response.data.projectname.map((projectname, index) => ({
-        //   name: projectname,
-        //   desc: response.data.desc[index],
-        //   // type: response.data.type[index]
-        // }));
         
         setProjectList(response.data);
       } catch (error) {
@@ -77,6 +70,10 @@ function Create() {
     if (fieldName === "projectDescription" && value.length > 50) {
       window.confirm("限制字數在50字內");
       value = value.substring(0, 50);
+    } 
+    if (fieldName === "projectName" && /[^a-zA-Z0-9\-_ ]/.test(value)) {
+      alert("專案名稱只能包含英文字符和數字");
+      return;
     }
     setFormData((prevData) => ({
       ...prevData,
@@ -95,7 +92,7 @@ function Create() {
             'Authorization': `Bearer ${token}`
           }
         });
-      console.log(response.data);
+      // console.log(response.data);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -112,7 +109,7 @@ function Create() {
         return;
       }
       setLoading(true);
-      console.log("Form submitted:", formData);
+      // console.log("Form submitted:", formData);
       try {
         const token = localStorage.getItem('jwtToken');
         const response = await axios.post(
@@ -131,7 +128,7 @@ function Create() {
         setResponse(response.data);    
         handleFormDataChange("projectName", "");
         handleFormDataChange("projectDescription", ""); 
-        console.log(response);
+
         setLoading(false);
         // 導航回去
         if(type_project == 2){
@@ -140,7 +137,7 @@ function Create() {
           navigate(`/Project?&type=1`);
           return ;
         }else{
-          console.log(projectName);
+          // console.log(projectName);
           localStorage.setItem(`${projectName}type`,1);
           navigate(`/Project?&type=1`);
           return ;

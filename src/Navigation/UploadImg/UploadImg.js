@@ -45,7 +45,7 @@ function UploadImg() {
 
     try {
       const results = await Promise.all(promises);
-      console.log('File information:', results);
+      // console.log('File information:', results);
 
       // Filter files
       const filteredFiles = results.filter((result) =>
@@ -58,7 +58,7 @@ function UploadImg() {
 
 
 
-      console.log(imagePreviews)
+      // console.log(imagePreviews)
     } catch (error) {
       console.error('Error reading file information:', error);
     }
@@ -100,14 +100,14 @@ function UploadImg() {
         // 在這裡添加對篩選模式的相關邏輯
       }
     }
-    console.log(mode);
+    // console.log(mode);
   }
   // 下載預覽 //modified
   const handleDownloadAll = () => {
     selectedFiles.forEach((file) => {
       const a = document.createElement('a');
       a.href = window.URL.createObjectURL(new Blob([file]));
-      console.log(a.href)
+      // console.log(a.href)
       a.setAttribute("download", file.name);
       document.body.appendChild(a);
       a.click();
@@ -168,10 +168,10 @@ function UploadImg() {
               'Authorization': `Bearer ${token}`
             }
           });
-        console.log(response.data);
+        // console.log(response.data);
         alert(response.data.message);
 
-        console.log(token);
+        // console.log(token);
         const response2 = await axios.post(
           `${c_s}/?step=1&username=${id}&projectname=${projectname}`,
           {},
@@ -183,7 +183,7 @@ function UploadImg() {
           }
         );
         setLoading(false);
-        console.log('step updated successfully:', response2.data);
+        // console.log('step updated successfully:', response2.data);
         navigate(`/Step?project=${projectname}`);
 
       } catch (error) {
@@ -192,7 +192,7 @@ function UploadImg() {
     }
   };
   useEffect(() => {
-    console.log("loading state test is ", loading);
+    // console.log("loading state test is ", loading);
   }, [loading, setLoading, handleUpload]);
 
   return (

@@ -20,7 +20,7 @@ function ConfirmReq() {
 
   const get_req = process.env.REACT_APP_GET_REQUIREMENT;
   const upload_req = process.env.REACT_APP_UPLOAD_REQUIREMENT;
-  console.log('Initial confirmed value:', confirmed);
+  // console.log('Initial confirmed value:', confirmed);
   const fetchData = async () => {
     try {
       const token = localStorage.getItem('jwtToken');
@@ -146,7 +146,7 @@ function ConfirmReq() {
         }
       );
     
-      console.log('Data updated successfully:', response.data);
+      // console.log('Data updated successfully:', response.data);
     
       setEditable(false);
     
@@ -169,9 +169,9 @@ function ConfirmReq() {
             Object.assign(parsedData, parsedItem);
           });
           setReqData(parsedData);
-          console.log(responseData);
+          // console.log(responseData);
           alert('Requirement update success!');
-          console.log(reqData);
+          // console.log(reqData);
         } catch (error) {
           console.error('Error fetching data:', error);
         }

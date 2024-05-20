@@ -4,6 +4,8 @@ import registerstyle from "./Register.module.css";
 import axios from "axios";
 import { useNavigate, NavLink } from "react-router-dom";
 import InstAI_icon from '../../image/iconnew.png'
+import MeteorShower from "../Login/MeteorShower";
+import SignUpBackground from "../../image/SignUpBackground.png";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -54,12 +56,7 @@ const Register = () => {
     }
     return error;
   };
-  // const deleteState = () =>{
-  //   localStorage.setItem('jwtToken',false);
-  //   alert('註銷token');
-  //   const token = localStorage.getItem('jwtToken');
-  //   console.log(token);
-  // }
+
   const signupHandler = (e) => {
     e.preventDefault();
     setFormErrors(validateForm(user));
@@ -83,95 +80,94 @@ const Register = () => {
   }, [formErrors]);
   // web rendering for Register
   return (
-    <Fragment>
-
-  {/* <div className={registerstyle.container}> */}
-  <div className="container"  style={{marginTop:"20vh"}}>
-
-<div className="row">
-  <div className="col-md-3 mx-auto"> 
-    <img src={InstAI_icon} className="img-fluid" alt="InstAi_Icon" ></img>
-  </div>
-</div>
-
-<div className="row" >
-  <div className="col-md-5  mx-auto"> 
-
-  <div className={`card rounded-5 ${registerstyle.registercard}`}>
-    <div className="card-body">
-    <h3 className="card-title text-center " style={{fontWeight:'bold'}}>Sign Up</h3>
-    <form>
-    <label className="form-label fs-6 mt-2 mb-1 fw-bold">First name</label>
-    <input
-      type="text"
-      name="fname"
-      id="fname"
-      onChange={changeHandler}
-      value={user.fname}
-      className="form-control fs-6  mt-1 mb-1 fw-bold"
-    />
-    <p className={`text-center ${basestyle.error}`}>{formErrors.fname}</p>
-    <label className="form-label fs-6  mt-1 mb-1 fw-bold">Last name</label>
-    <input
-      type="text"
-      name="lname"
-      id="lname"
-      onChange={changeHandler}
-      value={user.lname}
-      className="form-control fs-6  mt-1 mb-1 fw-bold"
-    />
-    <p className={`text-center ${basestyle.error}`}>{formErrors.lname}</p>
-    <label className="form-label fs-6  mt-1 mb-1 fw-bold">Email</label>
-    <input
-      type="email"
-      name="email"
-      id="email"
-      onChange={changeHandler}
-      value={user.email}
-      className="form-control fs-6  mt-1 mb-1 fw-bold"
-    />
-    <p className={`text-center ${basestyle.error}`}>{formErrors.email}</p>
-    <label className="form-label fs-6  mt-1 mb-1 fw-bold">Password</label>
-    <input
-      type="password"
-      name="password"
-      id="password"
-      onChange={changeHandler}
-      value={user.password}
-      className="form-control fs-6  mt-1 mb-1 fw-bold"
-    />
-    <p className={`text-center ${basestyle.error}`}>{formErrors.password}</p>
-    <label className="form-label fs-6  mt-1 mb-1 fw-bold">Confirm password</label>
-    <input
-      type="password"
-      name="cpassword"
-      id="cpassword"
-      onChange={changeHandler}
-      value={user.cpassword}
-      className="form-control fs-6  mt-1 mb-1 fw-bold"
-    />
-    <p className={`text-center ${basestyle.error}`}>{formErrors.cpassword}</p>
-    <button type="button" className={`btn ${basestyle.button_common} `} onClick={signupHandler}>
-      SIGN UP
-    </button>
-    <NavLink className={`nav-link text-center text-primary `} style={{fontWeight:'bold'}} to="/login">
-      Sign in to existing account
-    </NavLink>
-  </form>
-
+    <div style={{
+      backgroundImage: `url(${SignUpBackground})`,
+      backgroundSize: 'cover',
+      height: '100vh',
+      width: '100vw',
+      position: 'fixed',
+      overflow: 'hidden'
+    }}>
+      <MeteorShower />
+      <React.Fragment>
+        <div className="container" style={{ marginTop: "6vh" }}>
+          <div className="row">
+            <div className="col-md-5 mx-auto">
+              <div className={`card rounded-5 ${registerstyle.registercard}`}>
+                <div className="text-center">
+                  <img src={InstAI_icon} className="img-fluid" alt="InstAi_Icon" style={{ maxWidth: '150px', marginTop: '2vh' }}></img>
+                </div>
+                <div className="card-body">
+                  <h3 className="card-title text-center" style={{ fontWeight: 'bold' }}>Sign Up</h3>
+                  <form>
+                    <label className="form-label fs-6 mt-2 mb-1 fw-bold">First name</label>
+                    <input
+                      type="text"
+                      name="fname"
+                      id="fname"
+                      onChange={changeHandler}
+                      value={user.fname}
+                      className="form-control fs-6 mt-1 mb-1 fw-bold"
+                    />
+                    <p className={`text-center ${basestyle.error}`}>{formErrors.fname}</p>
+                    <label className="form-label fs-6 mt-1 mb-1 fw-bold">Last name</label>
+                    <input
+                      type="text"
+                      name="lname"
+                      id="lname"
+                      onChange={changeHandler}
+                      value={user.lname}
+                      className="form-control fs-6 mt-1 mb-1 fw-bold"
+                    />
+                    <p className={`text-center ${basestyle.error}`}>{formErrors.lname}</p>
+                    <label className="form-label fs-6 mt-1 mb-1 fw-bold">Email</label>
+                    <input
+                      type="email"
+                      name="email"
+                      id="email"
+                      onChange={changeHandler}
+                      value={user.email}
+                      className="form-control fs-6 mt-1 mb-1 fw-bold"
+                    />
+                    <p className={`text-center ${basestyle.error}`}>{formErrors.email}</p>
+                    <label className="form-label fs-6 mt-1 mb-1 fw-bold">Password</label>
+                    <input
+                      type="password"
+                      name="password"
+                      id="password"
+                      onChange={changeHandler}
+                      value={user.password}
+                      className="form-control fs-6 mt-1 mb-1 fw-bold"
+                    />
+                    <p className={`text-center ${basestyle.error}`}>{formErrors.password}</p>
+                    <label className="form-label fs-6 mt-1 mb-1 fw-bold">Confirm password</label>
+                    <input
+                      type="password"
+                      name="cpassword"
+                      id="cpassword"
+                      onChange={changeHandler}
+                      value={user.cpassword}
+                      className="form-control fs-6 mt-1 mb-1 fw-bold"
+                    />
+                    <p className={`text-center ${basestyle.error}`}>{formErrors.cpassword}</p>
+                    <button type="submit" className={`btn ${basestyle.button_common}`}>
+                      SIGN UP
+                    </button>
+                    <NavLink className={`nav-link text-center text-primary`} style={{fontWeight:'bold'}} to="/login">
+                      Sign in to existing account
+                    </NavLink>
+                  </form>
+                </div>
+              </div>
+              <div className="text-center mt-3" style={{ color: 'white' }}>
+                Have questions? Send email to <b>support@instai.co</b>
+              </div>
+            </div>
+          </div>
+        </div>
+      </React.Fragment>
     </div>
-  
-</div>
-<div className='text-center mt-3'>
-  Have questions? Send email to <b>support@instai.co</b>
-</div>
-
-  </div>
-</div>
-
-</div>
-
-    </Fragment>
   );
+  
 };
 export default Register;

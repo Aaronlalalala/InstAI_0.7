@@ -67,7 +67,7 @@ const Register = () => {
   //# register demo
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
-      console.log(user);
+      // console.log(user);
       axios
         .post("http://localhost:8080/api/account/signup/", user)
         .then((res) => {

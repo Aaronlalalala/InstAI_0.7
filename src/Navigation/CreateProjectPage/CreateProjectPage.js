@@ -39,7 +39,7 @@ function DecisionPage (){
     }
     
     useEffect(() => {
-      console.log("project type is ", typeOfProject);
+      // console.log("project type is ", typeOfProject);
     }, [typeOfProject]); 
 
     

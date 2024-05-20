@@ -35,11 +35,11 @@ export default function ImgPrompt() {
         params: { projectname: projectname, username: id }
       });
 
-      console.log("response data is", response.data); //  response data is {img_generation_remaining_count: 4}
+      // console.log("response data is", response.data); //  response data is {img_generation_remaining_count: 4}
       if (response.data === 'error') {
         throw new Error('Error fetching data');
       }
-      console.log(response.data);
+      // console.log(response.data);
       setChance(response.data.img_generation_remaining_count);
       console.log("current remaing count is",response.data.img_generation_remaining_count);
     } catch (error) {
@@ -57,7 +57,7 @@ export default function ImgPrompt() {
           'Authorization': `Bearer ${token}`
         }
       });
-      console.log("remaing count is", response.data);
+      // console.log("remaing count is", response.data);
       if (response.data === 'error') {
         throw new Error('Error fetching data');
       }
@@ -74,7 +74,7 @@ export default function ImgPrompt() {
     getCount(projectName);
   }, []);
   
-  // console.log("project name is",projectName," model title is",modelTitle);
+  console.log("project name is",projectName," model title is",modelTitle);
 
   const [formData, setFormData] = useState({
     enable_hr: false,
@@ -132,9 +132,9 @@ export default function ImgPrompt() {
     console.log("chance is", chance);
     const confirm = window.confirm("sure to submit prompt ?");
     if (confirm) {
-      console.log("chance is", chance, " times");
+      // console.log("chance is", chance, " times");
       const num = Math.abs(5 - chance);
-      console.log("number is", num);
+      // console.log("number is", num);
       if (chance > 0) {
         event.preventDefault();
         const updatedFormData = { ...formData, prompt: positveprompt, negative_prompt: negativeprompt };
@@ -143,7 +143,7 @@ export default function ImgPrompt() {
         const postData = async () => {
           try {
             const token = localStorage.getItem("jwtToken");
-            console.log(formData)
+            // console.log(formData)
             const response = await axios.post(`${prompt}?username=${id}&projectname=${projectName}&count=${num}`, formData, {
               headers: {
                 'Content-Type': 'application/json',
@@ -151,13 +151,13 @@ export default function ImgPrompt() {
               }
             });
             setState(!state);
-            console.log(response.data);
+            // console.log(response.data);
             const promptData = formData;
 
             localStorage.setItem(`${projectName}prmoptData`, JSON.stringify(promptData));
             await modifyCount(projectName, chance); // 注意這裡需要添加await關鍵字
             await getCount(projectName);
-            console.log("chance is", chance-1);
+            // console.log("chance is", chance-1);
             navigate(`/ImgDisplayPage`);
           } catch (error) {
             console.error("Error sending data to backend:", error);
@@ -181,7 +181,7 @@ export default function ImgPrompt() {
         sd_model_checkpoint: modelTitle,
       }
     }));
-    console.log(formData.override_settings.sd_model_checkpoint)
+    // console.log(formData.override_settings.sd_model_checkpoint)
   }, [positveprompt, modelTitle, negativeprompt]);
   
   return (

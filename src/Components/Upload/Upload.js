@@ -29,7 +29,7 @@ function Upload() {
         })
         if (!limitExceeded) setUploadedFiles(uploaded)
         
-        console.log(files)
+        // console.log(files)
         const formData = new FormData();
         for(let i =0;i<uploaded.length;++i){
           formData.append('file', uploaded[i]);
@@ -37,7 +37,7 @@ function Upload() {
         
         axios.post(`http://localhost:8080/api/upload/upload?username=${id}`, formData)
         .then(response => {
-          console.log(response.data);
+          // console.log(response.data);
           // Handle success
           alert('upload success')
         })

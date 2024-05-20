@@ -35,14 +35,11 @@ function Project() {
         },
         params: { projectname: projectname, username: id }
       });
-  
-      console.log("response data is", response.data);
+
       if (response.data === 'error') {
         throw new Error('Error fetching data');
       }
-      console.log(response.data);
       let chance = response.data.img_generation_remaining_count;  
-      console.log(chance);
       return chance ; 
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -61,16 +58,8 @@ function Project() {
             'Authorization': `Bearer ${token}`
           }
         });
-        // 預設會有type在response.data裡面
-        // console.log(response.data);
-        // const combinedProjects = response.data.projectname.map((projectname, index) => ({
-        //   name: projectname,
-        //   desc: response.data.desc[index],
-        //   // type: response.data.type[index]
-        // }));
         
         setProjectList(response.data);
-        console.log(response.data)
       } catch (error) {
         if (error.response.status === 403) {
           if (isMounted) {
@@ -103,7 +92,6 @@ function Project() {
             'Authorization': `Bearer ${token}`
           }
         });
-      console.log("response data is",response.data);
       if(response.data === 'error') {
         throw new Error('Error fetching data');
       }
@@ -129,20 +117,14 @@ function Project() {
     const updatedProjects = [...projectList];
     const deletedProject = updatedProjects.splice(index, 1)[0];
     localStorage.removeItem(`${deletedProject.name}type`);
-    localStorage.removeItem(`${deletedProject.name}chance`);
     localStorage.removeItem(`confirmStatusImg_${id}_${projectname}`);
     localStorage.removeItem(`confirmStatusReq_${id}_${projectname}`); 
-    localStorage.removeItem(`${projectname}Base64Data-1`);
-    localStorage.removeItem(`${projectname}Base64Data-2`);
-    localStorage.removeItem(`${projectname}Base64Data-3`);
-    localStorage.removeItem(`${projectname}Base64Data-4`);
     localStorage.removeItem(`${projectname} checkPoint`);
     localStorage.removeItem("traing name");
     localStorage.removeItem(`${projectname}prmoptData`);
     setProjectList(updatedProjects);
 
     try {
-      //console.log(deletedProject.name);
       const token = localStorage.getItem("jwtToken");
       const response = await axios.post(
         `${d_p}/?username=${type ? id : userid}`,
@@ -158,7 +140,6 @@ function Project() {
       );
 
       alert(response.data);
-      console.log(response);
     } catch (error) {
       console.error("Error sending data to backend:", error);
     }
@@ -170,9 +151,9 @@ function Project() {
       const status = await fetchstep(project.project_name);
       const chance = await getCount(project.project_name);
       const checkPoint = localStorage.getItem(`${project.project_name} checkPoint`);
-      console.log("check point is",checkPoint);
-      console.log("status is",status);
-      console.log("chance is",chance);
+      // console.log("check point is",checkPoint);
+      // console.log("status is",status);
+      // console.log("chance is",chance);
       if(ProjectType ==="Image generation") {
         if(status === "Image generation"){
           const newProjectname = project.project_name
@@ -218,8 +199,6 @@ function Project() {
     localStorage.removeItem('Role');
     console.log('註銷token');
     //alert('註銷token');
-    const token = localStorage.getItem('jwtToken');
-    console.log(token);
     navigate("/"); // Redirect to the home page
   };
 
@@ -232,31 +211,23 @@ function Project() {
     setShowLogoutPrompt(false);
   };
 
-  // const filteredProjects = projectList.filter(
-  //   project => project.projectname.toLowerCase().includes(searchTerm.toLowerCase())
-  // )
-  
-  
+
   const ProjectCard = ({ project, index, handleDeleteProject, handleNavigate }) => {
-    // 檢查 localStorage 中是否存在與 project.name 相對應的值
     const isProjectInLocalStorage = localStorage.getItem(`${project.name}type`) === '1';
-    // 檢查response裡面的project type 是否屬於1
-    // const isProjectInLocalStorage = project.type === 1;
-    // setDiffusionType(project.type); 
     const projectClass = project.Type === "Image generation" ? 'project-blue' : 'project';
     const typeCheck = isProjectInLocalStorage ? 'diffusion dataset' : "";
     return (
       <div className={`col-lg-2 col-md-3 mb-4 mt-3 ${projectClass}`} key={index}>
         <div className="project-list-grid" >
-          <h2 className="project-Name fs-4 fw-bold ">{project.project_name }<p className="project-imgnum fw-semibold mt-2 " >  Including: {project.img_quantity} imgs </p></h2>
-       
+        <h2 className="project-Name fs-4 fw-bold ">{project.project_name }<p className="project-imgnum fw-semibold mt-2 " >  Including: {project.img_quantity } imgs </p></h2>
           <div className="projectNavLink">
           <p >Status: {project.status}</p>
           <p className="">Type: {project.Type}</p>
-          <p className="project-Detial">Description: {project.project_description}<br />{typeCheck}</p>
+          <p className="project-Detial">Description: {project.project_description }<br />{typeCheck}</p>
 
      
           </div>
+          
           <div className="project-Delete">
             <button className="btn deleteButton" onClick={() => handleDeleteProject(project.project_name, index)}>刪除專案</button>
           </div>

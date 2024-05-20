@@ -15,8 +15,8 @@ export default function ModelStyle() {
   const modelSelect = p.REACT_APP_MODEL_SELECT;
   const get_model = p.REACT_APP_MODEL_GET;
   const projectName = localStorage.getItem("traing name");
-  console.log("traing name is",projectName,"  id is",id);
-
+  // console.log("traing name is",projectName,"  id is",id);
+  const [errorLoading , setErrorLoading] = useState(false); 
   const [modelImgs, setModelImgs] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -39,16 +39,16 @@ export default function ModelStyle() {
             'Authorization': `Bearer ${token}`
           }
         });
-        console.log(response.data);
+        // console.log(response.data);
         setModels(response.data)
         const base64Imgs = response.data.map(item => item.model_styleimg_base64);
         setModelImgs(base64Imgs);
-        console.log(response.data);
-        console.log(models);
+        setIsLoading(false); //
+        // console.log(response.data);
+        // console.log(models);
       } catch (error) {
+        setErrorLoading(true);
         console.log("error detected !");
-      } finally {
-        setIsLoading(false); // 在接收到響應或捕獲到錯誤後，設置isLoading為false
       }
     };
     fetchData();
@@ -87,7 +87,7 @@ export default function ModelStyle() {
     // 記錄數值
 
     const value = modelKey; // 設定使用甚麼model
-    console.log(value);
+    // console.log(value);
     const formData = new FormData();
     formData.append('modelKey', modelKey);
     formData.append('value', value);
@@ -100,7 +100,7 @@ export default function ModelStyle() {
             'Authorization': `Bearer ${token}`
           }
         });
-        console.log(response.data);
+        // console.log(response.data);
       } catch (error) {
         console.error("Error sending data to backend:", error);
       }
@@ -133,7 +133,8 @@ export default function ModelStyle() {
         </Navbar.Brand>
       </Navbar>
       <Container className="d-flex flex-column justify-content-center" style={{ minHeight: '60vh', maxWidth: '80rem', margin: '50px auto', backgroundColor: 'white', borderRadius: '15px', boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)', padding: '20px' }}>
-        <h2 className="text-center mb-4" style={{ marginLeft: "10px", fontFamily: 'Lato', fontStyle: 'normal' }}>What’s the image style for your AI model?</h2>
+        {errorLoading ? <h2 className="text-center mb-4" style={{ marginLeft: "10px", fontFamily: 'Lato', fontStyle: 'normal' }}>Error fetching </h2> :
+         <h2 className="text-center mb-4" style={{ marginLeft: "10px", fontFamily: 'Lato', fontStyle: 'normal' }}>What’s the image style for your AI model?</h2>}
         <Row className="justify-content-start">
 
 

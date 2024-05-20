@@ -18,7 +18,7 @@ function Step() {
   const [step, setStep] = useState();
   const [status, setStatus] = useState();
   const [model, setModel] = useState();
-  console.log("project type is", projectType);
+  // console.log("project type is", projectType);
   // 映射表
   // 後端回傳status 則使用映射表修改step 到對應的數字
   const statusToStep = {
@@ -42,9 +42,9 @@ function Step() {
           'Authorization': `Bearer ${token}`
         }
       });
-      console.log("project type is", projectType);
+      // console.log("project type is", projectType);
       setStatus(response.data);
-      console.log("response data is", response.data);
+      // console.log("response data is", response.data);
       setStep(statusToStep[response.data]);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -64,7 +64,7 @@ function Step() {
             'Authorization': `Bearer ${token}`
           }
         });
-      console.log(response.data);
+      // console.log(response.data);
       fetchstep();
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -72,8 +72,8 @@ function Step() {
   }
 
 
-  console.log("status is", status)
-  console.log("step is", step);
+  // console.log("status is", status)
+  // console.log("step is", step);
 
   const fetchModel = async () => {
 
@@ -91,7 +91,7 @@ function Step() {
       if (response.status === 200) {
         console.log(response.data)
         setModel(response.data)
-        console.log(model)
+        // console.log(model)
 
 
 
@@ -111,7 +111,7 @@ function Step() {
   const handleDownloadModel = async () => {
     try {
       const token = localStorage.getItem('jwtToken');
-      console.log(token);
+      // console.log(token);
       const response = await axios({
         method: 'post',
         url: `${download_model}?project_id=${model[0].project_id}`,
@@ -121,7 +121,7 @@ function Step() {
         }
       });
   
-      console.log('Download started');
+      // console.log('Download started');
       const url = window.URL.createObjectURL(new Blob([response.data], { type: 'application/zip' }));
       const link = document.createElement('a');
       link.href = url;
